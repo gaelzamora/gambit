@@ -19,7 +19,9 @@ func InsertCategory(c models.Category) (int64, error) {
 	}
 	defer Db.Close()
 
-	sentence := "INSERT INTO category(Categ_Name, Categ_Path) VALUES ('" + c.CategName + "','" + c.CategPath + "')"
+	fmt.Println("Hola")
+
+	sentence := "INSERT INTO category (Categ_Name, Categ_Path) VALUES ('" + c.CategName + "','" + c.CategPath + "')"
 
 	var result sql.Result
 

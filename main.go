@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"os"
 	"strings"
 
@@ -9,7 +10,7 @@ import (
 	"github.com/gaelzamora/gambit/awsgo"
 	"github.com/gaelzamora/gambit/bd"
 	"github.com/gaelzamora/gambit/handlers"
-	
+
 	/*
 		"github.com/aws/aws-lambda-go/lambda/messages"
 		"github.com/gaelzamora/gambit/handlers"
@@ -18,6 +19,7 @@ import (
 )
 
 func main() {
+	fmt.Println("Ejecuta lambda")
 	lambda.Start(EjecutoLambda)
 }
 
@@ -48,6 +50,8 @@ func EjecutoLambda(ctx context.Context, request events.APIGatewayV2HTTPRequest) 
 		Body: string(message),
 		Headers: headersResp,
 	}
+
+	fmt.Println("Ya salio")
 
 	return res, nil
 }
