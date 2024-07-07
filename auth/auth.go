@@ -20,7 +20,7 @@ type TokenJSON struct {
 	Client_id string
 	Username string
 }
-
+	
 func ValidoToken(token string) (bool, error, string) {
 	parts := strings.Split(token, ".")
 
