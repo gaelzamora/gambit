@@ -2,24 +2,20 @@ package main
 
 import (
 	"context"
-	"fmt"
+
 	"os"
 	"strings"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/gaelzamora/gambit/awsgo"
 	"github.com/gaelzamora/gambit/bd"
+
 	"github.com/gaelzamora/gambit/handlers"
 
-	/*
-		"github.com/aws/aws-lambda-go/lambda/messages"
-		"github.com/gaelzamora/gambit/handlers"
-	*/
 	lambda "github.com/aws/aws-lambda-go/lambda"
 )
 
 func main() {
-	fmt.Println("Ejecuta lambda")
 	lambda.Start(EjecutoLambda)
 }
 
@@ -28,7 +24,7 @@ func EjecutoLambda(ctx context.Context, request events.APIGatewayV2HTTPRequest) 
 	awsgo.InicializoAWS()
 
 	if !ValidoParametros() {
-		panic("Error en los parametros, debe enviar 'SecretName', 'UrlPrefix'")
+		panic("Error en los parámetros. debe enviar 'SecretName', 'UrlPrefix'")
 	}
 
 	var res *events.APIGatewayProxyResponse
@@ -47,23 +43,19 @@ func EjecutoLambda(ctx context.Context, request events.APIGatewayV2HTTPRequest) 
 
 	res = &events.APIGatewayProxyResponse{
 		StatusCode: status,
-		Body: string(message),
-		Headers: headersResp,
+		Body:       string(message),
+		Headers:    headersResp,
 	}
 
-	fmt.Println("Ya salio")
-
 	return res, nil
+
 }
 
- 
 func ValidoParametros() bool {
-	
 	_, traeParametro := os.LookupEnv("SecretName")
 	if !traeParametro {
 		return traeParametro
 	}
-
 	_, traeParametro = os.LookupEnv("UrlPrefix")
 	if !traeParametro {
 		return traeParametro
