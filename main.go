@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"fmt"
+	"log"
 
 	"os"
 	"strings"
@@ -10,17 +12,17 @@ import (
 	"github.com/gaelzamora/gambit/awsgo"
 	"github.com/gaelzamora/gambit/bd"
 
-	"github.com/gaelzamora/gambit/handlers"
-
 	lambda "github.com/aws/aws-lambda-go/lambda"
+	"github.com/gaelzamora/gambit/handlers"
 )
 
 func main() {
 	lambda.Start(EjecutoLambda)
 }
 
-func EjecutoLambda(ctx context.Context, request events.APIGatewayV2HTTPRequest) (*events.APIGatewayProxyResponse, error) {
 
+func EjecutoLambda(ctx context.Context, request events.APIGatewayV2HTTPRequest) (*events.APIGatewayProxyResponse, error) {
+	log.Println("Hello World")
 	awsgo.InicializoAWS()
 
 	if !ValidoParametros() {
@@ -56,6 +58,9 @@ func ValidoParametros() bool {
 	if !traeParametro {
 		return traeParametro
 	}
+
+	fmt.Println(traeParametro)
+
 	_, traeParametro = os.LookupEnv("UrlPrefix")
 	if !traeParametro {
 		return traeParametro

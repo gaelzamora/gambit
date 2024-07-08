@@ -2,8 +2,10 @@ package routers
 
 import (
 	"encoding/json"
+	"fmt"
 	"strconv"
-//	"github.com/aws/aws-lambda-go/events"
+
+	//	"github.com/aws/aws-lambda-go/events"
 	"github.com/gaelzamora/gambit/bd"
 	"github.com/gaelzamora/gambit/models"
 )
@@ -25,6 +27,11 @@ func InsertCategory(body string, user string) (int, string) {
 	}
 
 	isAdmin, msg := bd.IsAdmin(user)
+
+
+	fmt.Println(isAdmin)
+	fmt.Println(msg)
+
 
 	if !isAdmin {
 		return 400, msg

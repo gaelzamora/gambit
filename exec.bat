@@ -1,3 +1,5 @@
-set GOOS=linux 
+set GOOS=linux
 go build main.go
-zip main.zip main
+go build -tags lambda.norpc -o bootstrap main.go
+del main.zip
+tar.exe -a -cf main.zip main bootstrap
