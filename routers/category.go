@@ -61,7 +61,7 @@ func UpdateCategory(body string, User string, id int) (int, string) {
 	t.CategID = id
 	err2 := bd.UpdateCategory(t)
 	if err2 != nil {
-		return 400, "Ocurrio un error al intentar realizar el UPDATE de la categoría " + strconv.Itoa(id) + " > " + err.Error()
+		return 400, "Ocurrio un error al intentar realizar el UPDATE de la categoría " + strconv.Itoa(id) + " > " + err2.Error()
 	}
 
 	return 200, "Update OK"
@@ -112,7 +112,7 @@ func SelectCategories(body string, request events.APIGatewayV2HTTPRequest) (int,
 	Categ, err3 := json.Marshal(lista)
 
 	if err3 != nil {
-		return 400, "Ocurrio un error al intentar convertir en JSON Categoria/s > "+err2.Error()
+		return 400, "Ocurrio un error al intentar convertir en JSON Categoria/s > "+err3.Error()
 	}
 
 	return 200, string(Categ)

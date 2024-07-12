@@ -43,7 +43,7 @@ func Manejadores(path string, method string, body string, headers map[string]str
 }
 
 func validoAuthorizacion(path string, method string, headers map[string]string) (bool, int, string) {
-	if (path == "product" && method == "GET") || 
+	if (path == "products" && method == "GET") || 
 		(path == "category" && method == "GET") {
 			return true, 200, ""
 		}
@@ -71,6 +71,13 @@ func validoAuthorizacion(path string, method string, headers map[string]string) 
 }
 
 func ProcesoUser(body string, path string, method string, user string, id string, request events.APIGatewayV2HTTPRequest) (int, string) {
+	if path == "user/me" {
+		switch method {
+		case "PUT":
+			return routers.UpdateUser(body, user)
+		}
+	}
+
 	return 400, "Method Invalid"
 }
 
@@ -80,6 +87,10 @@ func ProcesoProducts(body string, path string, method string, user string, id in
 		return routers.InsertProduct(body, user)
 	case "PUT":
 		return routers.UpdateProduct(body, user, id)
+	case "DELETE":
+		return routers.DeleteProduct(user, id)
+	case "GET":
+		return routers.SelectProduct(request)
 	}
 	
 	return 400, "Method Invalid"
@@ -104,7 +115,7 @@ func ProcesoCategory(body string, path string, method string, user string, id in
 }
 
 func ProcesoStock(body string, path string, method string, user string, id int, request events.APIGatewayV2HTTPRequest) (int, string) {
-	return 400, "Method Invalid"
+	return routers.UpdateStock(body, user, id)
 }
 
 func ProcesoAddress(body string, path string, method string, user string, id int, request events.APIGatewayV2HTTPRequest) (int, string) {

@@ -23,12 +23,12 @@ func EscapeString(t string) string {
 
 func ArmoSentencia(s string, fieldName string, typeField string, ValueN int, ValueF float64, ValueS string) string {
 	if (typeField == "S" && len(ValueS) == 0) || 
-		(typeField == "F" && len(ValueS) == 0) || 
-		(typeField == "N" && len(ValueS) == 0) {
+		(typeField == "F" && ValueF == 0) || 
+		(typeField == "N" && ValueN == 0) {
 			return s
 	}
 
-	if !strings.HasSuffix(s, "SET") {
+	if !strings.HasSuffix(s, "SET ") {
 		s += ", "
 	}
 
@@ -36,9 +36,9 @@ func ArmoSentencia(s string, fieldName string, typeField string, ValueN int, Val
 	case "S":
 		s+=fieldName + " = '" + EscapeString(ValueS) + "'"
 	case "N":
-		s+=fieldName + " = '" + strconv.Itoa(ValueN)
+		s+=fieldName + " = " + strconv.Itoa(ValueN)
 	case "F":
-		s+=fieldName + " = '" + strconv.FormatFloat(ValueF, 'e', -1, 64)	
+		s+=fieldName + " = " + strconv.FormatFloat(ValueF, 'e', -1, 64)	
 	}
 
 	return s

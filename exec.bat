@@ -1,6 +1,3 @@
-git add .
-git commit -m "Last changes"
-git push
 set GOOS=linux
 go build main.go
 go build -tags lambda.norpc -o bootstrap main.go
