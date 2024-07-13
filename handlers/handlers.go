@@ -19,13 +19,22 @@ func Manejadores(path string, method string, body string, headers map[string]str
 	isOK, statusCode, user := validoAuthorizacion(path, method, headers)
 
 	if !isOK {
+		fmt.Println("No esta bien")
 		return statusCode, user
 	}
+
+	fmt.Println("Entro")
+
+	if len(path) < 4 {
+		fmt.Println(path)
+        return 400, "Path too short"
+    }
 
 	fmt.Println("path[0:4] = " + path[0:4])
 
 	switch path[0:4] {
 	case "user":
+		fmt.Println("Entre a user")
 		return ProcesoUser(body, path, method, user, id, request)
 	case "prod":
 		return ProcesoProducts(body, path, method, user, idn, request)
@@ -38,6 +47,8 @@ func Manejadores(path string, method string, body string, headers map[string]str
 	case "orde":
 		return ProcesoOrder(body, path, method, user, idn, request)
 	}
+
+	fmt.Println("Ni modo")
 
 	return 400, "Method Invalid"
 }
@@ -75,6 +86,14 @@ func ProcesoUser(body string, path string, method string, user string, id string
 		switch method {
 		case "PUT":
 			return routers.UpdateUser(body, user)
+		case "GET":
+			return routers.SelectUser(body, user)
+		}
+	}
+
+	if path == "users" {
+		if method == "GET" {
+			return routers.SelectUsers(body, user, request)
 		}
 	}
 
