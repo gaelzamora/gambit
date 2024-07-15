@@ -82,7 +82,7 @@ func validoAuthorizacion(path string, method string, headers map[string]string) 
 }
 
 func ProcesoUser(body string, path string, method string, user string, id string, request events.APIGatewayV2HTTPRequest) (int, string) {
-	if path == "user/me" {
+	if path == "users/me" {
 		switch method {
 		case "PUT":
 			return routers.UpdateUser(body, user)
@@ -96,6 +96,9 @@ func ProcesoUser(body string, path string, method string, user string, id string
 			return routers.SelectUsers(body, user, request)
 		}
 	}
+
+	fmt.Println(path)
+	fmt.Println(method)
 
 	return 400, "Method Invalid"
 }
@@ -138,6 +141,11 @@ func ProcesoStock(body string, path string, method string, user string, id int, 
 }
 
 func ProcesoAddress(body string, path string, method string, user string, id int, request events.APIGatewayV2HTTPRequest) (int, string) {
+	switch method {
+	case "POST":
+		return routers.InsertAddress(body, user)
+	}
+
 	return 400, "Method Invalid"
 }
 
