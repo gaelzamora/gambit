@@ -36,7 +36,7 @@ func InsertOrder(o models.Orders) (int64, error) {
 
 	for _, od := range o.OrderDetails {
 		sentence = "INSERT INTO order_detail (OD_OrderId, OD_ProdId, OD_Quantity, OD_Price) VALUES (" + strconv.Itoa(int(LastInsertId))
-		sentence +=	","+strconv.Itoa(od.OD_ProdId)+","+strconv.Itoa(od.OD_Quantity)+","+strconv.FormatFloat(float64(od.OD_Price), 'f', -1, 64)
+		sentence +=	","+strconv.Itoa(od.OD_ProdId)+","+strconv.Itoa(od.OD_Quantity)+","+strconv.FormatFloat(od.OD_Price, 'f', -1, 64)
 
 		fmt.Println(sentence)
 		_, err = Db.Exec(sentence)

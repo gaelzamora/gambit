@@ -66,12 +66,12 @@ type Address struct {
 }
 
 type Orders struct {
-	Order_Id int `json:"orderId"`
-	Order_UserUUID string `json:"userUUID"`
-	Order_AddId int `json:"orderAddId"`
-	Order_Date string `json:"orderDate"`
-	Order_Total float64 `json:"orderTotal"`
-	OrderDetails []OrdersDetails
+	Order_Id       int     `json:"orderId"`
+	Order_UserUUID string  `json:"orderUserUUID"`
+	Order_AddId    int     `json:"orderAddId"`
+	Order_Date     string  `json:"orderDate"`
+	Order_Total    float64 `json:"orderTotal"`
+	OrderDetails   []OrdersDetails
 }
 
 type OrdersDetails struct {
@@ -79,5 +79,5 @@ type OrdersDetails struct {
 	OD_OrderId int `json:"odOrderId"`
 	OD_ProdId int `json:"odProdId"`
 	OD_Quantity int `json:"odQuantity"`
-	OD_Price int `json:"odPrice"`
+	OD_Price float64 `json:"odPrice"`
 }
