@@ -32,9 +32,9 @@ func Manejadores(path string, method string, body string, headers map[string]str
 
 	fmt.Println(path)
 
-	fmt.Println("path[0:4] = " + path[0:4])
+	fmt.Println("path[0:4] = " + path[1:5])
 
-	switch path[0:4] {
+	switch path[1:5] {
 	case "user":
 		fmt.Println("Entre a user")
 		return ProcesoUser(body, path, method, user, id, request)
