@@ -30,6 +30,8 @@ func Manejadores(path string, method string, body string, headers map[string]str
         return 400, "Path too short"
     }
 
+	fmt.Println(path)
+
 	fmt.Println("path[0:4] = " + path[0:4])
 
 	switch path[0:4] {

@@ -25,6 +25,7 @@ func DbConnect() error {
 		return err
 	}
 
+	fmt.Println(Db.Ping())
 	err = Db.Ping()
 	if err != nil {
 		fmt.Println(err.Error())
