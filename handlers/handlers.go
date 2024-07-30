@@ -56,8 +56,8 @@ func Manejadores(path string, method string, body string, headers map[string]str
 }
 
 func validoAuthorizacion(path string, method string, headers map[string]string) (bool, int, string) {
-	if (path == "products" && method == "GET") || 
-		(path == "category" && method == "GET") {
+	if (path == "/products" && method == "GET") || 
+		(path == "/category" && method == "GET") {
 			return true, 200, ""
 		}
 
@@ -84,7 +84,7 @@ func validoAuthorizacion(path string, method string, headers map[string]string) 
 }
 
 func ProcesoUser(body string, path string, method string, user string, id string, request events.APIGatewayV2HTTPRequest) (int, string) {
-	if path == "users/me" {
+	if path == "/users/me" {
 		switch method {
 		case "PUT":
 			return routers.UpdateUser(body, user)
@@ -93,7 +93,7 @@ func ProcesoUser(body string, path string, method string, user string, id string
 		}
 	}
 
-	if path == "users" {
+	if path == "/users" {
 		if method == "GET" {
 			return routers.SelectUsers(body, user, request)
 		}
