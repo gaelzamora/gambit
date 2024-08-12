@@ -150,14 +150,14 @@ func SelectProduct(p models.Product, choice string, page int, pageSize int, orde
     var sentenceCount string
     var where, limit string    
 
-    sentence = "SELECT Prod_Id, Prod_Title, Prod_Description, Prod_CreatedAt, Prod_Updated, Prod_Price, Prod_Path, Prod_CategoryId, Prod_Stock FROM products "
+    sentence = "SELECT Prod_Id, Prod_Title, Prod_Description, Prod_CreatedAt, Prod_Updated, Prod_Price, Prod_Path, Prod_CategoryId, Prod_Stock FROM products"
     sentenceCount = "SELECT count(*) as registros FROM products "
 
     switch choice {
     case "P":
         where = " WHERE Prod_Id = " + strconv.Itoa(p.ProdId)
     case "S":
-        where = " WHERE UCASE(CONCAT(Prod_Title, Prod_Description)) LIKE '%" + strings.ToUpper(p.ProdSearch) + "%' "
+        where = " WHERE UPPER(Prod_Title) LIKE '%PLAYERA%' OR UPPER(Prod_Description) LIKE '%"+strings.ToUpper(p.ProdSearch)+"%'"
     case "C":
         where = " WHERE Prod_CategoryId = " + strconv.Itoa(p.ProdCategId)
     case "U":
