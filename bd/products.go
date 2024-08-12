@@ -166,11 +166,12 @@ func SelectProduct(p models.Product, choice string, page int, pageSize int, orde
         join := " JOIN category ON Prod_CategoryId = Categ_Id AND Categ_Path LIKE '%" + strings.ToUpper(p.ProdCategPath) + "%' "
         sentence += join
         sentenceCount += join
-    }
+    }	
 
     sentenceCount += where
 
     fmt.Println("La consulta es " + sentence)
+	fmt.Println("El choice es "+choice)
     fmt.Println(sentenceCount)
 
     rows, err := Db.Query(sentenceCount)
